@@ -1,0 +1,9 @@
+{
+    "name": "flexpress/component-layout",
+    "description": "Layouts system using ACF for WordPress",
+    "autoload": {
+        "psr-4": {
+            "FlexPress\\Components\\Layouts\\": "src/FlexPress/Components/Layouts/"
+        }
+    }
+}
