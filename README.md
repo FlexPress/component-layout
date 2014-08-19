@@ -78,3 +78,46 @@ $layoutsController = $pimple['layoutsController'];
 $layoutsController->thePageLayouts('<your_field_name_here>');
 ```
 Make sure you change the <your_field_name_here> to whatever you called your field when setting up the acf and you should be all done.
+
+## Advanced layouts
+Previous examples showed very simple layouts with no options, this next example will show you how to add acf field to a layout and specifiy if the layout is available for the given post_id:
+
+```
+class HelloUniverse extends AbstractLayout {
+  
+    public function getLabel() {
+        return "Hello universe";
+    }
+    
+    public function getMarkup() {
+        echo "<p>Hello universe</p>";
+        if($this->field['fp_show_time']) { 
+            echo "<p>", date(), "</p>";
+        }
+        
+    }
+    
+    // make the layout only available on pages
+    public function isAvailableOn($post_id) {
+        return get_post_type($post_id) == 'page';
+    }
+  
+    // to get this array, export a acf field group and grab everything in 'fields' => array(...etc
+    public function getFields() {
+        return array (
+            array (
+                'key' => 'field_53b132d9363ec',
+                'label' => 'Show time',
+                'name' => 'fp_show_time',
+                'type' => 'true_false',
+                'message' => '',
+                'default_value' => 0
+            )
+        );
+    }
+  
+}
+```
+So what has changed from the hello world layout? Well we have added the use of a field, we did this my implementing the getFields() method and returning the acf field. As the comment in the code mentions you can get that by exporting a acf field group and extracting everything for the key 'fields' => etc. We have then utilised that in the getMarkup by using the field propery, this is the acf field that you would get back if you did get_field(<field_name>).
+
+Finally we have also implemented the isAvailableOn() method, this gives us the post id and we can return a boolean value for if it is available. In this example we have make it so the layout is only available on pages.
