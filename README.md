@@ -121,3 +121,15 @@ class HelloUniverse extends AbstractLayout {
 So what has changed from the hello world layout? Well we have added the use of a field, we did this my implementing the getFields() method and returning the acf field. As the comment in the code mentions you can get that by exporting a acf field group and extracting everything for the key 'fields' => etc. We have then utilised that in the getMarkup by using the field propery, this is the acf field that you would get back if you did get_field(<field_name>).
 
 Finally we have also implemented the isAvailableOn() method, this gives us the post id and we can return a boolean value for if it is available. In this example we have make it so the layout is only available on pages.
+
+## LayoutController
+We have showed you how the AbstractLayout works but there are a few other methods on the LayoutController that might be useful. 
+
+### Public methods
+- theSiteLayouts($fieldName) - Outputs the layouts for the site, when stored in options instead of postmeta
+- thePageLayouts($fieldName, $postId = false) - Outputs the layouts for the current page, you can specify the postId as the second param
+- getLayoutObjects() - used by the by the two methods above to grab the layout data from the database.
+- getFieldLayouts() - used by the FlexibleLayout field to get all the field objects.
+
+### Protected methods
+- outputLayouts($layouts) - Outputs the layouts, used by the other output methods like thePageLayouts, simply loops the given layouts and calls getMarkup() on them.
