@@ -25,7 +25,7 @@ $pimple["flexibleLayout"] = function ($c) {
 };
 
 // a proxy class that is required as when you create a acf field it runs all the hooks and we dont want to do that when we create an instance of it to pass to the fieldshelper, so we use a fieldproxy.
-$this["flexibleLayoutProxy"] = function ($c) {
+$pimple["flexibleLayoutProxy"] = function ($c) {
     return new FlexibleLayoutProxy($c);
 };
 
