@@ -60,7 +60,7 @@ class Controller
      * @author Tim Perry
      *
      */
-    public function theSiteLayouts($fieldName = 'fpt_layouts')
+    public function theSiteLayouts($fieldName)
     {
         if ($layoutObjects = $this->getLayoutObjects($fieldName, "options")) {
             $this->outputLayouts($layoutObjects);
@@ -75,7 +75,7 @@ class Controller
      * @param bool $postID
      * @author Tim Perry
      */
-    public function thePageLayouts($fieldName = 'fpt_layouts', $postID = false)
+    public function thePageLayouts($fieldName, $postID = false)
     {
         if ($layoutObjects = $this->getLayoutObjects($fieldName, $postID)) {
             $this->outputLayouts($layoutObjects);
@@ -118,7 +118,7 @@ class Controller
      * @author Tim Perry
      *
      */
-    public function getLayoutObjects($acf_field_name = 'fpt_layouts', $post_id = false)
+    public function getLayoutObjects($acf_field_name, $post_id = false)
     {
 
         if (!$post_id) {
